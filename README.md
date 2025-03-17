@@ -1,4 +1,5 @@
 Cross-Chain Governance
+
 Project Description
 Create a cross-chain DAO that facilitates governance between different blockchains. The goal is to bridge the gap between siloed blockchain ecosystems by enabling governance-related interactions and decisions across chains.
 
