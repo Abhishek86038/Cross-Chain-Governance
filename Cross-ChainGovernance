@@ -1,0 +1,38 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.9;
+
+contract CrossChainGovernance {
+    string public projectTitle;
+    string public projectDescription;
+
+    address public owner;
+    mapping(address => bool) public isApprovedChain;
+
+    event ChainApproved(address chainAddress);
+    event ChainRevoked(address chainAddress);
+
+    constructor() {
+        projectTitle = "Cross-Chain Governance";
+        projectDescription = "Create a cross-chain DAO that facilitates governance between different blockchains.";
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not authorized");
+        _;
+    }
+
+    function approveChain(address _chainAddress) public onlyOwner {
+        isApprovedChain[_chainAddress] = true;
+        emit ChainApproved(_chainAddress);
+    }
+
+    function revokeChain(address _chainAddress) public onlyOwner {
+        isApprovedChain[_chainAddress] = false;
+        emit ChainRevoked(_chainAddress);
+    }
+
+    function isChainApproved(address _chainAddress) public view returns (bool) {
+        return isApprovedChain[_chainAddress];
+    }
+}
